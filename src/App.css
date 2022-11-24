@@ -16,3 +16,8 @@
     font-weight: bold;
     font-size: 1.1em;
 }
+
+.alert_mess{
+    display: flex;
+    flex-direction: column;
+}
