@@ -2,17 +2,17 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
- const ComboBox = ({options}) => {
+ const ComboBox = ({options,onClick,onChange}) => {
+  React.useEffect(()=>{console.log(options) ;console.log(onClick) ;console.log(onChange)},[options,onClick,onChange])
   return (
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={options.map(option=>option)}
-      getOptionLabel={(option) => typeof option === 'string'
-                  || option instanceof String ? option : ""}
-      sx={{ width: 300 }}
-      
-      renderInput={(params) => <TextField  {...params} label="Пользователи" />}
+      options={options}
+      sx={{ width: 1285 ,marginTop: 2 }}
+      onClick={onClick}
+      onChange={(e,value)=>onChange(value)}
+      renderInput={(params) =>  <TextField  onClick={onClick}   {...params} label="Пользователи" />}
     />
   );
 }

@@ -12,6 +12,7 @@ const WebSock= ()=> {
     const [connected, setConnected] = useState(false);
     const [username, setUsername] = useState({userName:''})
     const [users,setUsers] = useState([]);
+    const [usersDrop,setUsersDrop] = useState([]);
     const [usersOptions, setUsersOptions] = useState({userTo:'',theme:'',message:''})
     const [userMessages, setUserMessages] = useState([])
 
@@ -35,7 +36,9 @@ const WebSock= ()=> {
               console.log(res)
               setUsers(res.data)
               setUserMessages(res.data);
-              console.log(res.data)
+              res.data.sort(function(a,b){
+                return new Date(b.date) - new Date(a.date);
+              })
             }
           }) 
           .catch(console.log("fasfasf"))
@@ -87,14 +90,15 @@ const WebSock= ()=> {
 
 
 
-  const usersOption = () =>{
+  function usersOption(){
             axios.post('http://localhost:5000/getAllUsers',{userName:username.userName})
         .then(res=>{
            if(res.status === 200){
             console.log(res)
-            setUsers(res.data);
-            console.log(users)
+            setUsersDrop(res.data);
+            console.log(res.data)
           }
+        
         }) 
         .catch(console.log("fasfasf"))
   }
@@ -103,11 +107,11 @@ const WebSock= ()=> {
   const sendMessage = (event) =>{
     event.preventDefault()
     const messagesUser = {
-      userName:username.userName,
+      userFrom:username.userName,
       theme:usersOptions.theme,
       userTo:usersOptions.userTo,
       message: usersOptions.message,
-      date:new Date().toLocaleString(),
+      date:new Date(),
       event: 'message'
     }
     axios.post('http://localhost:5000/sendMessage',messagesUser)
@@ -140,17 +144,24 @@ const WebSock= ()=> {
 
   return (
     <>
+    
     <Container className='container-my'>
     <Form onSubmit={sendMessage}>
-    <Form.Select onClick={usersOption} onChange={e=>setUsersOptions({...usersOptions,userTo: e.target.value})} aria-label="Default select example">
+    <DropDown  options={usersDrop.map((user,index) => {
+              const qwe =  {
+              label:user.userName,
+              key:index}
+              return qwe
+            })} onClick={usersOption} onChange={e=>setUsersOptions({...usersOptions,userTo: e.label})}></DropDown>
+    {/* <Form.Select onClick={usersOption} onChange={e=>setUsersOptions({...usersOptions,userTo: e.target.value})} aria-label="Default select example">
       <option disabled>Выберите собеседника</option>
-      {users.map(user =><option  key={user.userName}>
+      {usersDrop.map(user =><option  key={user.userName}>
         {user.event === 'connection' 
         ? user.userName
         : user.userName
         }
         </option>)}
-    </Form.Select>
+    </Form.Select> */}
     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
         <Form.Label>Тема</Form.Label>
         <Form.Control onChange={e=>setUsersOptions({...usersOptions,theme: e.target.value})} type="text" placeholder="Введите тему" />
@@ -167,7 +178,7 @@ const WebSock= ()=> {
         {userMessages && userMessages.map(user =><Form.Label className='label alert_mess' key={user._id}>
         {user.event === 'connection' 
         ? <Alert className='alert'>пользователь {user.userName} подключился</Alert>
-        : <Alert className='alert'>От: {user.userName} | Кому: {user.userTo} | Тема: {user.theme} | Сообщение :{user.message} | Дата {user.date}</Alert>
+        : <Alert className='alert'>От: {user.userFrom} | Кому: {user.userTo} | Тема: {user.theme} | Сообщение :{user.message} | Дата: {user.date}</Alert>
         }
         </Form.Label>)}
         </Form.Label>
