@@ -18,7 +18,7 @@ const WebSock= ()=> {
 
 
      const connect = ()=> {
-        socket.current = new WebSocket('https://task6client.herokuapp.com/')
+        socket.current = new WebSocket('wss://task6client.herokuapp.com/')
 
         socket.current.onopen = () => {
             setConnected(true)
