@@ -18,7 +18,7 @@ const WebSock= ()=> {
 
 
      const connect = ()=> {
-        socket.current = new WebSocket('ws://localhost:7000')
+        socket.current = new WebSocket('ws://task6server.herokuapp.com/:7000')
 
         socket.current.onopen = () => {
             setConnected(true)
@@ -30,7 +30,7 @@ const WebSock= ()=> {
               date: usersOptions.date,
               event: 'connection'
             }
-              axios.post('http://localhost:5000/allUsersMessage',{userName:username.userName})
+              axios.post('https://task6server.herokuapp.com/allUsersMessage',{userName:username.userName})
           .then(res=>{
              if(res.status === 200){
               console.log(res)
@@ -62,7 +62,7 @@ const WebSock= ()=> {
     const handleSubmit = (event) => {
       event.preventDefault()
       console.log(username)
-      axios.post('http://localhost:5000/register',username)
+      axios.post('https://task6server.herokuapp.com/register',username)
       .then(res=>{
          if(res.status === 200){
           alert('вы вошли')
