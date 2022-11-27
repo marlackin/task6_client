@@ -15,10 +15,12 @@ const WebSock= ()=> {
     const [usersDrop,setUsersDrop] = useState([]);
     const [usersOptions, setUsersOptions] = useState({userTo:'',theme:'',message:''})
     const [userMessages, setUserMessages] = useState([])
+    
 
 
      const connect = ()=> {
-        socket.current = new WebSocket('wss://task6server.herokuapp.com')
+        let HOST = window.location.origin.replace(/^http/, 'ws')
+        socket.current = new WebSocket(HOST)
 
         socket.current.onopen = () => {
             setConnected(true)
