@@ -20,7 +20,7 @@ const WebSock= ()=> {
 
      const connect = ()=> {
         let HOST = window.location.origin.replace(/^http/, 'ws')
-        socket.current = new WebSocket('wss://task6server.herokuapp.com')
+        socket.current = new WebSocket('ws://task6server.herokuapp.com')
 
         socket.current.onopen = () => {
             setConnected(true)
