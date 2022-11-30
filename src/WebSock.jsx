@@ -20,7 +20,7 @@ const WebSock= ()=> {
 
      const connect = ()=> {
         let HOST = window.location.origin.replace(/^http/, 'ws')
-        socket.current = new WebSocket(HOST+'://task6server.herokuapp.com')
+        socket.current = new WebSocket(HOST+'://task6serverwebsocket-production.up.railway.app/')
 
         socket.current.onopen = () => {
             setConnected(true)
@@ -32,7 +32,7 @@ const WebSock= ()=> {
               date: usersOptions.date,
               event: 'connection'
             }
-              axios.post('https://task6server.herokuapp.com/allUsersMessage',{userName:username.userName})
+              axios.post('https://task6serverwebsocket-production.up.railway.app/allUsersMessage',{userName:username.userName})
           .then(res=>{
              if(res.status === 200){
               console.log(res)
@@ -64,7 +64,7 @@ const WebSock= ()=> {
     const handleSubmit = (event) => {
       event.preventDefault()
       console.log(username)
-      axios.post('https://task6server.herokuapp.com/register',username)
+      axios.post('https://task6serverwebsocket-production.up.railway.app/register',username)
       .then(res=>{
          if(res.status === 200){
           alert('вы вошли')
@@ -93,7 +93,7 @@ const WebSock= ()=> {
 
 
   function usersOption(){
-            axios.post('http://localhost:5000/getAllUsers',{userName:username.userName})
+            axios.post('https://task6serverwebsocket-production.up.railway.app/getAllUsers',{userName:username.userName})
         .then(res=>{
            if(res.status === 200){
             console.log(res)
@@ -116,7 +116,7 @@ const WebSock= ()=> {
       date:new Date(),
       event: 'message'
     }
-    axios.post('http://localhost:5000/sendMessage',messagesUser)
+    axios.post('https://task6serverwebsocket-production.up.railway.app/sendMessage',messagesUser)
 .then(res=>{
    if(res.status === 200){
     console.log(res)
