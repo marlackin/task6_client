@@ -1,8 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
 import {Form,Container,Button,Alert,ListGroup,Nav} from 'react-bootstrap';
 import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router-dom';
 import DropDown from './DropDown'
 
 const WebSock= ()=> {
