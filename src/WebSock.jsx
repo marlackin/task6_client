@@ -17,8 +17,7 @@ const WebSock= ()=> {
 
 
      const connect = ()=> {
-        let HOST = window.location.origin.replace(/^http/, 'ws')
-        socket.current = new WebSocket(HOST+'://task6serverwebsocket-production.up.railway.app/')
+        socket.current = new WebSocket("ws://task6serverwebsocket-production.up.railway.app/")
 
         socket.current.onopen = () => {
             setConnected(true)
