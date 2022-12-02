@@ -23,7 +23,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "postinstall": "npm ci ",
+    "build": "npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
