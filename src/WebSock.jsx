@@ -17,7 +17,7 @@ const WebSock= ()=> {
 
 
      const connect = ()=> {
-        socket.current = new WebSocket("wss://task6serverwebsocket-production.up.railway.app/ws",)
+        socket.current = new WebSocket("wss://task6serverwebsocket-production.up.railway.app",)
 
         socket.current.onopen = () => {
             setConnected(true)
